@@ -4,7 +4,7 @@ This software is an iOS app built as a proof of concept for a design I've been w
 
 The software presently manages multiple screens and dynamically handles the creation and deletion of text and functional buttons.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/yKEvA5yBHrQ)
 
 # Development Environment
 
