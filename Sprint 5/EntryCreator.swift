@@ -5,31 +5,28 @@
 //  Created by Brendan Koetting on 3/18/21.
 //
 
-import Foundation
 import UIKit
 
-class EntryCreator {
+class EntryCreator : UIViewController {
     
-    var goalName : UITextField!
-    var goalType : UIPickerView!
-    var goalValue: UISlider!
+    @IBOutlet weak var goalName : UITextField!
+    @IBOutlet weak var goalType : UIPickerView!
+    @IBOutlet weak var goalValue: UISlider!
+    var pickerData              = PickerDataHelper()
     
-    
-    init(textField: UITextField!, picker: UIPickerView!, slider: UISlider!)
-    {
-        goalName  = textField
-        goalType  = picker
-        PickerDataHelper(goalType)
-        goalValue = slider
+    override func viewDidLoad() {
+        super.viewDidLoad();
+        goalType.dataSource = pickerData
+        goalType.delegate   = pickerData
     }
     
-    func createEntry(_ goalArray: GoalArray, y: Int, frame: CGRect) -> Entry
+    func createEntry(_ goalArray: GoalArray) -> Entry
     {
         let name    = goalName.text
         let type    = goalType.selectedRow(inComponent: 0)
         let value   = Int(goalValue.value)
         
-        return Entry(goalArray, y: y, text: name ?? "", category: type, reward: value)
+        return Entry(goalArray, text: name ?? "", category: type, reward: value)
     }
     
 }

@@ -10,18 +10,13 @@ import UIKit
 class ViewController: UIViewController {
 
     var viewPile  = ViewPile()
-    var goalArray = GoalArray()
     
     @IBOutlet weak var MessageView  : UIView!
     @IBOutlet weak var Welcome      : UILabel!
     @IBOutlet weak var Countdown    : UILabel!
-    @IBOutlet weak var GoalList     : UIView!
-    @IBOutlet weak var EntryField   : UITextField!
+    @IBOutlet weak var GoalList     : GoalView!
     
     @IBOutlet weak var ButtonView: UIView!
-    
-    //                 EntryView
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +24,17 @@ class ViewController: UIViewController {
         viewPile.Add(name: "message", view : MessageView)
         viewPile.Add(name: "button",  view : ButtonView)
         viewPile.See(name: "button")
-        goalArray = GoalArray(canvas: GoalList)
-    }
-    
-    @IBAction func EntrySubmit(_ sender: Any) {
-        goalArray.Add(text: EntryField.text)
-        EntryField.text = ""
     }
     
     @IBAction func ButtonPressed(_ sender: Any) {
         viewPile.See(name: "message")
     }
+    
+    @IBAction func Unwind(unwindSeque: UIStoryboardSegue) {
+        let source = unwindSeque.source as! EntryCreator
+        GoalList!.goalArray!.AddEntry(source.createEntry(GoalList!.goalArray!))
+    }
+    
+    
 }
 

@@ -21,9 +21,15 @@ public class ViewPile
     
     public func See(name : String)
     {
-        if let old = views[scene] {old.isHidden = true}
+        if let old = views[scene] {
+            old.isHidden = true
+        }
         scene = name
         views[scene]!.isHidden = false
+        for subview in views[scene]!.subviews {
+            if let goalview = subview as? GoalView      {goalview.show()}
+            if let rewards  = subview as? RewardDisplay {rewards.Load()}
+        }
     }
     
     init()
